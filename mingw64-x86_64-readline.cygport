@@ -1,0 +1,29 @@
+CROSS_HOST="x86_64-w64-mingw32"
+inherit cross
+
+NAME="mingw64-x86_64-readline"
+VERSION=6.2
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="Command-line editing and history libraries for Win64 toolchain"
+DESCRIPTION="The Readline library provides a set of functions for use by
+applications that allow users to edit command lines as they are typed in.
+Both Emacs and vi editing modes are available.  The Readline library includes
+additional functions to maintain a list of previously-entered command lines,
+to recall and perhaps reedit those lines, and perform csh-like history
+expansion on previous commands."
+HOMEPAGE="http://www.gnu.org/software/readline"
+SRC_URI="mirror://gnu/readline/readline-${VERSION}.tar.gz"
+SRC_DIR="readline-${VERSION}"
+
+NO_AUTOHEADER=1
+
+CYGCONF_ARGS="bash_cv_termcap_lib=libncurses"
+
+src_install() {
+	cd ${B}
+	cyginstall
+
+	# $pkgdatadir contains only examples
+	rm -fr ${D}${CROSS_DATADIR}/{info,man,readline}
+}

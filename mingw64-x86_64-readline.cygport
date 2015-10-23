@@ -3,7 +3,7 @@ inherit cross
 
 NAME="mingw64-x86_64-readline"
 VERSION=6.2
-RELEASE=1
+RELEASE=2
 CATEGORY="Devel"
 SUMMARY="Command-line editing and history libraries for Win64 toolchain"
 DESCRIPTION="The Readline library provides a set of functions for use by
@@ -15,6 +15,14 @@ expansion on previous commands."
 HOMEPAGE="http://www.gnu.org/software/readline"
 SRC_URI="mirror://gnu/readline/readline-${VERSION}.tar.gz"
 SRC_DIR="readline-${VERSION}"
+PATCH_URI="
+	mirror://gnu/readline/readline-6.2-patches/readline62-001
+	mirror://gnu/readline/readline-6.2-patches/readline62-002
+	mirror://gnu/readline/readline-6.2-patches/readline62-003
+	mirror://gnu/readline/readline-6.2-patches/readline62-004
+	mirror://gnu/readline/readline-6.2-patches/readline62-005
+	6.2-vpath.patch
+"
 
 NO_AUTOHEADER=1
 

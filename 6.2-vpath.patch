@@ -1,0 +1,44 @@
+--- origsrc/readline-6.2/Makefile.in	2010-10-11 10:53:52.000000000 -0500
++++ src/readline-6.2/Makefile.in	2015-10-23 13:35:23.447612300 -0500
+@@ -27,7 +27,7 @@ PACKAGE_STRING = @PACKAGE_STRING@
+ PACKAGE_VERSION = @PACKAGE_VERSION@
+ 
+ srcdir = @srcdir@
+-VPATH = .:@srcdir@
++VPATH = @srcdir@
+ top_srcdir = @top_srcdir@
+ BUILD_DIR = @BUILD_DIR@
+ 
+--- origsrc/readline-6.2/doc/Makefile.in	2009-12-23 09:42:59.000000000 -0600
++++ src/readline-6.2/doc/Makefile.in	2015-10-23 13:34:56.694715100 -0500
+@@ -18,7 +18,7 @@
+ 
+ topdir = @top_srcdir@
+ srcdir = @srcdir@
+-VPATH = .:@srcdir@
++VPATH = @srcdir@
+ 
+ prefix = @prefix@
+ 
+--- origsrc/readline-6.2/examples/Makefile.in	2010-12-28 14:55:32.000000000 -0600
++++ src/readline-6.2/examples/Makefile.in	2015-10-23 13:35:02.308428000 -0500
+@@ -29,7 +29,7 @@ datarootdir = @datarootdir@
+ bindir = @bindir@
+ srcdir = @srcdir@
+ datadir = @datadir@
+-VPATH = .:@srcdir@
++VPATH = @srcdir@
+ top_srcdir = @top_srcdir@
+ #BUILD_DIR = .
+ BUILD_DIR = @BUILD_DIR@
+--- origsrc/readline-6.2/shlib/Makefile.in	2010-12-28 14:56:21.000000000 -0600
++++ src/readline-6.2/shlib/Makefile.in	2015-10-23 13:34:45.273264800 -0500
+@@ -30,7 +30,7 @@ RL_LIBRARY_NAME = readline
+ datarootdir = @datarootdir@
+ 
+ srcdir = @srcdir@
+-VPATH = .:@top_srcdir@
++VPATH = @top_srcdir@
+ topdir = @top_srcdir@
+ BUILD_DIR = @BUILD_DIR@
+ 

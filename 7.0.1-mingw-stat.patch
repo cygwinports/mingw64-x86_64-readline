@@ -1,0 +1,43 @@
+--- origsrc/readline-7.0/colors.c	2016-01-25 09:38:00.000000000 -0600
++++ src/readline-7.0/colors.c	2017-01-11 20:50:51.019909800 -0600
+@@ -170,8 +170,10 @@ _rl_print_color_indicator (const char *f
+ 
+   if (linkok == -1 && _rl_color_indicator[C_MISSING].string != NULL)
+     colored_filetype = C_MISSING;
++#if defined(S_ISLNK)
+   else if (linkok == 0 && S_ISLNK(mode) && _rl_color_indicator[C_ORPHAN].string != NULL)
+     colored_filetype = C_ORPHAN;	/* dangling symlink */
++#endif
+   else if(stat_ok != 0)
+     {
+       static enum indicator_no filetype_indicator[] = FILETYPE_INDICATORS;
+@@ -183,6 +185,12 @@ _rl_print_color_indicator (const char *f
+         {
+           colored_filetype = C_FILE;
+ 
++#ifndef S_ISUID
++#define S_ISUID 0
++#endif
++#ifndef S_ISGID
++#define S_ISGID 0
++#endif
+           if ((mode & S_ISUID) != 0 && is_colored (C_SETUID))
+             colored_filetype = C_SETUID;
+           else if ((mode & S_ISGID) != 0 && is_colored (C_SETGID))
+@@ -211,12 +219,16 @@ _rl_print_color_indicator (const char *f
+             colored_filetype = C_STICKY;
+ #endif
+         }
++#if defined(S_ISLNK)
+       else if (S_ISLNK (mode))
+         colored_filetype = C_LINK;
++#endif
+       else if (S_ISFIFO (mode))
+         colored_filetype = C_FIFO;
++#if defined (S_ISSOCK)
+       else if (S_ISSOCK (mode))
+         colored_filetype = C_SOCK;
++#endif
+       else if (S_ISBLK (mode))
+         colored_filetype = C_BLK;
+       else if (S_ISCHR (mode))

@@ -2,8 +2,8 @@ CROSS_HOST="x86_64-w64-mingw32"
 inherit cross
 
 NAME="mingw64-x86_64-readline"
-VERSION=6.2
-RELEASE=2
+VERSION=7.0.1
+RELEASE=1
 CATEGORY="Devel"
 SUMMARY="Command-line editing and history libraries for Win64 toolchain"
 DESCRIPTION="The Readline library provides a set of functions for use by
@@ -13,15 +13,12 @@ additional functions to maintain a list of previously-entered command lines,
 to recall and perhaps reedit those lines, and perform csh-like history
 expansion on previous commands."
 HOMEPAGE="http://www.gnu.org/software/readline"
-SRC_URI="mirror://gnu/readline/readline-${VERSION}.tar.gz"
-SRC_DIR="readline-${VERSION}"
-PATCH_URI="
-	mirror://gnu/readline/readline-6.2-patches/readline62-001
-	mirror://gnu/readline/readline-6.2-patches/readline62-002
-	mirror://gnu/readline/readline-6.2-patches/readline62-003
-	mirror://gnu/readline/readline-6.2-patches/readline62-004
-	mirror://gnu/readline/readline-6.2-patches/readline62-005
-	6.2-vpath.patch
+SRC_URI="mirror://gnu/readline/readline-${VERSION%.*}.tar.gz"
+SRC_DIR="readline-${VERSION%.*}"
+PATCH_URI=$(seq -f "mirror://gnu/readline/readline-${VERSION%.*}-patches/readline${PV_MAJ_MIN//./}-%03g " ${VERSION##*.})
+PATCH_URI+="
+	7.0.1-mingw-stat.patch
+	7.0.1-mingw-unistd.patch
 "
 
 NO_AUTOHEADER=1
